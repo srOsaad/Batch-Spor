@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../backend_and_modals/batch_class.dart';
+import '../../../backend_and_modals/time_convertor.dart';
 
 class AddModify extends StatefulWidget {
   const AddModify(
@@ -80,8 +81,7 @@ class _AddModifyState extends State<AddModify> {
             children: [
               const SizedBox(height: 30),
               const Text('Class Details',
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold)),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               const SizedBox(height: 30),
               TextField(
                 controller: cw,
@@ -143,7 +143,7 @@ class _AddModifyState extends State<AddModify> {
                               textDirection: TextDirection.ltr,
                               child: MediaQuery(
                                 data: MediaQuery.of(context).copyWith(
-                                  alwaysUse24HourFormat: true,
+                                  alwaysUse24HourFormat: false,
                                 ),
                                 child: child!,
                               ),
@@ -155,8 +155,7 @@ class _AddModifyState extends State<AddModify> {
                         createdAtTime = time ?? TimeOfDay.now();
                       });
                     },
-                    child:
-                        Text('${createdAtTime.hour} : ${createdAtTime.minute}'),
+                    child: Text(formatChange12HourT(createdAtTime)),
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
@@ -166,7 +165,7 @@ class _AddModifyState extends State<AddModify> {
                         initialDate: createdAtDate,
                         initialEntryMode: DatePickerEntryMode.calendar,
                         firstDate: DateTime(2024, 10, 18),
-                        lastDate: DateTime.now(),
+                        lastDate: DateTime(2030, 12, 31),
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
                             data: Theme.of(context).copyWith(

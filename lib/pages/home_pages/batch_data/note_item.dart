@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../backend_and_modals/key_data2.dart';
+import '../../../backend_and_modals/time_convertor.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({
@@ -24,7 +25,7 @@ class NoteItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                  "${note.classDetails.createdAt.day}-${note.classDetails.createdAt.month}-${note.classDetails.createdAt.year}       ${note.classDetails.createdAt.hour}:${note.classDetails.createdAt.minute}"),
+                  "${note.classDetails.createdAt.day}-${note.classDetails.createdAt.month}-${note.classDetails.createdAt.year}      ${formatChange12HourD(note.classDetails.createdAt)}"),
               Row(
                 children: [
                   ElevatedButton(

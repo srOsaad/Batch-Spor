@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../backend_and_modals/batch_class.dart';
 import 'package:day_picker/day_picker.dart';
+import '../../backend_and_modals/time_convertor.dart';
 
 class AddModify extends StatefulWidget {
   AddModify({super.key, required this.batch, required this.onDone});
@@ -156,7 +157,8 @@ class _AddModifyState extends State<AddModify> {
                   onPressed: () async {
                     final TimeOfDay? time = await showTimePicker(
                       context: context,
-                      initialTime: _selectedTime ?? TimeOfDay.now(),
+                      initialTime:
+                          _selectedTime ?? const TimeOfDay(hour: 0, minute: 0),
                       initialEntryMode: TimePickerEntryMode.input,
                       orientation: Orientation.portrait,
                       builder: (BuildContext context, Widget? child) {
@@ -168,7 +170,7 @@ class _AddModifyState extends State<AddModify> {
                             textDirection: TextDirection.ltr,
                             child: MediaQuery(
                               data: MediaQuery.of(context).copyWith(
-                                alwaysUse24HourFormat: true,
+                                alwaysUse24HourFormat: false,
                               ),
                               child: child!,
                             ),
@@ -181,7 +183,7 @@ class _AddModifyState extends State<AddModify> {
                     });
                   },
                   child: Text(_selectedTime != null
-                      ? "${_selectedTime!.hour} : ${_selectedTime!.minute}"
+                      ? formatChange12HourT(_selectedTime!)
                       : "Select Time"),
                 ),
               ],
